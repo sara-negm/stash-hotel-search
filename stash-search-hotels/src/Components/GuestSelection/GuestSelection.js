@@ -10,7 +10,6 @@ export default function GuestSelection() {
 
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
-  const buttonRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -18,8 +17,11 @@ export default function GuestSelection() {
         setIsOpen(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   function pluralize(count, singular, plural = `${singular}s`) {
@@ -29,85 +31,45 @@ export default function GuestSelection() {
   const childrenText = children > 0 ? ` & ${pluralize(children, 'Child', 'Children')}` : '';
 
   const handleAdultChange = (delta) => {
-    dispatch(setAdults(Math.max(1, adults + delta)));
+    const newValue = Math.max(1, adults + delta);
+    dispatch(setAdults(newValue));
   };
 
   const handleChildChange = (delta) => {
-    dispatch(setChildren(Math.max(0, children + delta)));
+    const newValue = Math.max(0, children + delta);
+    dispatch(setChildren(newValue));
   };
 
   return (
     <div className="guest-selector" ref={wrapperRef}>
-      <button
-        className="input-wrapper"
-        onClick={() => setIsOpen((prev) => !prev)}
-        aria-haspopup="dialog"
-        aria-expanded={isOpen}
-        aria-controls="guestDropdown"
-        ref={buttonRef}
-        aria-label={`Guest selector. Currently selected ${pluralize(adults, 'Adult')}${childrenText}`}
-      >
+      <div className="input-wrapper" onClick={() => setIsOpen(true)}>
         <input
           type="text"
           readOnly
           value={`${pluralize(adults, 'Adult')}${childrenText}`}
           className="custom-input"
-          aria-hidden="true"
-          tabIndex={-1}
         />
-        <span className="chevron-icon" aria-hidden="true">
+        <span className="chevron-icon">
           {isOpen ? <ChevronUp /> : <ChevronDown />}
         </span>
-      </button>
+      </div>
 
       {isOpen && (
-        <div
-          id="guestDropdown"
-          className="selector-dropdown"
-          role="dialog"
-          aria-label="Select number of guests"
-        >
+        <div className="selector-dropdown" onClick={(e) => e.stopPropagation()}>
           <div className="row">
-            <label id="adults-label" className="sr-only">Adults</label>
-            <span aria-labelledby="adults-label">Adults</span>
-            <div className="controls" role="group" aria-label="Adults count">
-              <button
-                type="button"
-                onClick={() => handleAdultChange(-1)}
-                aria-label="Decrease adults"
-              >
-                −
-              </button>
-              <span aria-live="polite">{adults}</span>
-              <button
-                type="button"
-                onClick={() => handleAdultChange(1)}
-                aria-label="Increase adults"
-              >
-                +
-              </button>
+            <span>Adults</span>
+            <div className="controls">
+              <button type="button" onClick={() => handleAdultChange(-1)}>−</button>
+              <span>{adults}</span>
+              <button type="button" onClick={() => handleAdultChange(1)}>+</button>
             </div>
           </div>
-
           <div className="row">
-            <label id="children-label" className="sr-only">Children</label>
-            <span aria-labelledby="children-label">Children</span>
-            <div className="controls" role="group" aria-label="Children count">
-              <button
-                type="button"
-                onClick={() => handleChildChange(-1)}
-                aria-label="Decrease children"
-              >
-                −
-              </button>
-              <span aria-live="polite">{children}</span>
-              <button
-                type="button"
-                onClick={() => handleChildChange(1)}
-                aria-label="Increase children"
-              >
-                +
-              </button>
+            <span>Children</span>
+            <div className="controls">
+              <button type="button" onClick={() => handleChildChange(-1)}>−</button>
+              <span>{children}</span>
+              <button type="button" onClick={() => handleChildChange(1)}>+</button>
             </div>
           </div>
         </div>
