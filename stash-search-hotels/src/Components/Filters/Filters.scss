@@ -1,23 +1,66 @@
-.filters {
+.filtersPanel {
     display: flex;
-    gap: 20px;
-    margin: 20px 0;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    gap: 24px;
+    background: #ffffff;
+    padding: 24px 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   
-    .filter-group {
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 16px;
+    }
+  
+    .filterGroup {
       display: flex;
       flex-direction: column;
+      gap: 6px;
+      min-width: 160px;
   
       label {
         font-weight: 600;
-        margin-bottom: 6px;
+        font-size: 14px;
+        color: #333;
       }
   
-      select {
-        padding: 6px 12px;
-        border-radius: 4px;
+      select,
+      input[type="number"] {
+        padding: 8px 10px;
+        border-radius: 6px;
         border: 1px solid #ccc;
+        background: #f9f9f9;
+        font-size: 14px;
+        color: #333;
+  
+        &:focus {
+          border-color: #e18923;
+          outline: none;
+          background: #fff;
+        }
+      }
+    }
+  
+    .checkboxGroup {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+  
+      label {
+        font-size: 14px;
+        font-weight: 500;
+      }
+  
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: #e18923;
       }
     }
   }

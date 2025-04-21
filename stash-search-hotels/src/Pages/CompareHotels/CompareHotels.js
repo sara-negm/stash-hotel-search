@@ -23,32 +23,32 @@ export default function CompareHotels() {
             </div>
             <h2>Compare Hotels</h2>
             <div className="compareGrid">
-  {hotelsToCompare.map(hotel => (
-    <div key={hotel.id} className="hotelCard" onClick={() => navigate(`/hotelDetails/${hotel.id}`)}>
-      <img src={hotel.image} alt={hotel.name} className="hotelImage" />
+                {hotelsToCompare.map(hotel => (
+                    <div key={hotel.id} className="hotelCard" onClick={() => navigate(`/hotelDetails/${hotel.id}`)}>
+                        <img src={hotel.image} alt={hotel.name} className="hotelImage" />
 
-      <div className="cardBody">
-        <div className="priceRating">
-          <span className="price">${hotel.daily_rate}<span className="perNight">/night</span></span>
-          <span className="rating">⭐ 5.0</span>
-        </div>
+                        <div className="cardBody">
+                            <div className="priceRating">
+                                <span className="price">${hotel.daily_rate}<span className="perNight">/night</span></span>
+                                <span className="rating">⭐ 5.0</span>
+                            </div>
 
-        <div className="locationRow">
-          <span className="icon">📍</span>
-          <span>{hotel.city}</span>
-        </div>
+                            <div className="locationRow">
+                                <span className="icon">📍</span>
+                                <span>{hotel.city}</span>
+                            </div>
 
-        <h3 className="hotelName">{hotel.name}</h3>
+                            <h3 className="hotelName">{hotel.name}</h3>
 
-        <p className="description">
-          Enjoy a stylish stay at our {hotel.name} with prime access to {hotel.city}'s attractions.
-        </p>
+                            <p className="description">
+                                Enjoy a stylish stay at our {hotel.name} with prime access to {hotel.city}'s attractions.
+                            </p>
 
-        <button className="chooseRoomBtn">Choose Room</button>
-      </div>
-    </div>
-  ))}
-</div>
+                            <button className="chooseRoomBtn">Choose Room</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
         </div>
     );

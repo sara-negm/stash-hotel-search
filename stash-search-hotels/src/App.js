@@ -1,6 +1,6 @@
 import './App.css';
 import Home from './Pages/Home/Home';
-import store, { persistor } from "./redux/store"; // ✅ import your store here
+import store, { persistor } from "./redux/store";
 import HotelDetails from "./Pages/HotelDetails/HotelDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";

@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from './searchSlice';
 
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // uses localStorage
+import storage from 'redux-persist/lib/storage'; 
 
 import { combineReducers } from 'redux';
 
@@ -21,7 +21,7 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // needed for redux-persist + Date objects
+      serializableCheck: false,
     }),
 });
 

@@ -199,29 +199,55 @@
 
 .resultsHeader {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   text-align: center;
-  margin: 24px;
   vertical-align: middle;
   gap: 8px;
 
 }
 
-.compareBtn {
-  width: 100px;
-  color: white;
-  background-color: #e18923;
-  border: none;
-  padding: 8px;
-  height: 50px;
-  margin-top: 30px;
+.compareBtnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  &:hover {
-    cursor: pointer;
-    background-color: #a66419;
-
+  @media (max-width: 768px) {
+    margin-top: 16px;
   }
 }
+
+.compareBtn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #e18923, #f3a34f);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-top: 32px;
+  height: auto;
+  min-width: 180px;
+
+  &:hover {
+    background: linear-gradient(135deg, #c9751e, #e18923);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: 3px solid #ffdfa8;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 16px;
+  }
+}
+
 
 .headerContent {
   display: flex;

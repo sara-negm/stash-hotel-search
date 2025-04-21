@@ -12,6 +12,9 @@ export default function SearchResult() {
   const [sortOption, setSortOption] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
   const [compareList, setCompareList] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('');
+  const [memberOnly, setMemberOnly] = useState(false);
+  const [minRating, setMinRating] = useState('');
 
   const searchTerm = location.trim() !== "" ? location.toLowerCase() : hotelName.toLowerCase();
   const navigate = useNavigate();
@@ -29,7 +32,6 @@ export default function SearchResult() {
     hotel.city.toLowerCase().includes(searchTerm)
   );
 
-  // Filter by price
   filteredHotels = filteredHotels.filter((hotel) => {
     const price = hotel.daily_rate;
     if (priceFilter === '0-100') return price <= 100;
@@ -37,8 +39,22 @@ export default function SearchResult() {
     if (priceFilter === '200+') return price > 200;
     return true;
   });
+if (memberOnly) {
+  filteredHotels = filteredHotels.filter(hotel => hotel.has_member_rate);
+}
 
-  // Sort
+if (selectedCity) {
+  filteredHotels = filteredHotels.filter(hotel =>
+    hotel.city.toLowerCase() === selectedCity.toLowerCase()
+  );
+}
+
+if (minRating) {
+  filteredHotels = filteredHotels.filter(hotel =>
+    hotel.rating >= parseFloat(minRating)
+  );
+}
+
   if (sortOption === 'az') {
     filteredHotels.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortOption === 'za') {
@@ -48,6 +64,7 @@ export default function SearchResult() {
   } else if (sortOption === 'high-low') {
     filteredHotels.sort((a, b) => b.daily_rate - a.daily_rate);
   }
+  const uniqueCities = [...new Set(filteredHotels.map(h => h.city))];
 
   return (
     <div>
@@ -61,67 +78,77 @@ export default function SearchResult() {
           setSortOption={setSortOption}
           priceFilter={priceFilter}
           setPriceFilter={setPriceFilter}
+          selectedCity={selectedCity}
+          setSelectedCity={setSelectedCity}
+          memberOnly={memberOnly}
+          setMemberOnly={setMemberOnly}
+          minRating={minRating}
+          setMinRating={setMinRating}
+          availableCities={uniqueCities}
         />
+
         {compareList.length >= 2 && (
+          <div className="compareBtnWrapper">
           <button
             className="compareBtn"
             onClick={() => navigate('/compare', { state: { compareList } })}
           >
             Compare {compareList.length} Hotels
           </button>
+          </div>
         )}
 
       </div>
       {filteredHotels.length > 0 ? (
         <div className="resultsContainer">
-        <div className="searchResults">
+          <div className="searchResults">
 
-          {filteredHotels.map((hotel) => {
-            const originalPrice = hotel.daily_rate;
-            const isMember = hotel.has_member_rate;
-            const discountedPrice = isMember ? Math.round(originalPrice * 0.9) : originalPrice;
+            {filteredHotels.map((hotel) => {
+              const originalPrice = hotel.daily_rate;
+              const isMember = hotel.has_member_rate;
+              const discountedPrice = isMember ? Math.round(originalPrice * 0.9) : originalPrice;
 
-            return (
-              <div className="hotelItem" key={hotel.id}>
-                <div className="hotelImageWrapper">
-                  <img src={hotel.image} alt={hotel.name} />
-                  <div className="arrow left">‹</div>
-                  <div className="arrow right">›</div>
-                </div>
-
-                <div className="hotelDetails" onClick={() => navigate(`/hotelDetails/${hotel.id}`)}>
-                  <h3>{hotel.name}</h3>
-                  <div className="location">{hotel.city}</div>
-                  <div className="rating">
-                    <div className="stars">⭐⭐⭐⭐⭐</div>
-                    <div>9.0 / 10</div>
+              return (
+                <div className="hotelItem" key={hotel.id}>
+                  <div className="hotelImageWrapper">
+                    <img src={hotel.image} alt={hotel.name} />
+                    <div className="arrow left">‹</div>
+                    <div className="arrow right">›</div>
                   </div>
-                  <div className="partner">⭐ Stash Partner <div className="points">Earn 10x points</div></div>
-                </div>
 
-                <div className="priceSection">
-                  {isMember && <div className="memberRate">🏷 Member Rate</div>}
-                  <div className="price">
-                    {isMember && <span className="originalPrice">${originalPrice}</span>}
-                    <span>${discountedPrice}</span>
+                  <div className="hotelDetails" onClick={() => navigate(`/hotelDetails/${hotel.id}`)}>
+                    <h3>{hotel.name}</h3>
+                    <div className="location">{hotel.city}</div>
+                    <div className="rating">
+                      <div className="stars">⭐⭐⭐⭐⭐</div>
+                      <div>9.0 / 10</div>
+                    </div>
+                    <div className="partner">⭐ Stash Partner <div className="points">Earn 10x points</div></div>
                   </div>
-                  <div>
-                  <input
-                    type="checkbox"
-                    checked={!!compareList.find((h) => h.id === hotel.id)}
-                    onChange={() => toggleCompare(hotel)}
-                    aria-label={`Select ${hotel.name} for comparison`}
-                    style={{ "zIndex": 1000 }}
-                    title="Compare"
-                  />
-                  <label>Compare</label>
+
+                  <div className="priceSection">
+                    {isMember && <div className="memberRate">🏷 Member Rate</div>}
+                    <div className="price">
+                      {isMember && <span className="originalPrice">${originalPrice}</span>}
+                      <span>${discountedPrice}</span>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        checked={!!compareList.find((h) => h.id === hotel.id)}
+                        onChange={() => toggleCompare(hotel)}
+                        aria-label={`Select ${hotel.name} for comparison`}
+                        style={{ "zIndex": 1000 }}
+                        title="Compare"
+                      />
+                      <label>Compare</label>
+                    </div>
+                    <button className="ctaButton">Select your room</button>
                   </div>
-                  <button className="ctaButton">Select your room</button>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
         </div>
       ) : (
         <p>No hotels found for your search.</p>
