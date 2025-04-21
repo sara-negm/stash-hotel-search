@@ -15,7 +15,10 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       backdrop-filter: blur(10px);
       width: fit-content;
-  
+      position: relative;
+      overflow: visible !important;
+      z-index: 1;
+
       @media (max-width: 768px) {
         flex-direction: column;
         gap: 16px;

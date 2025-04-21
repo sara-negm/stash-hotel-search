@@ -105,13 +105,17 @@ export default function SearchResult() {
                     {isMember && <span className="originalPrice">${originalPrice}</span>}
                     <span>${discountedPrice}</span>
                   </div>
+                  <div>
                   <input
                     type="checkbox"
                     checked={!!compareList.find((h) => h.id === hotel.id)}
                     onChange={() => toggleCompare(hotel)}
                     aria-label={`Select ${hotel.name} for comparison`}
                     style={{ "zIndex": 1000 }}
+                    title="Compare"
                   />
+                  <label>Compare</label>
+                  </div>
                   <button className="ctaButton">Select your room</button>
                 </div>
               </div>
