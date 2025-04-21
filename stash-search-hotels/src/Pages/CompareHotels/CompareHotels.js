@@ -17,8 +17,10 @@ export default function CompareHotels() {
 
     return (
         <div className="compareTableContainer">
-            <Header />
-            <SearchForm />
+            <div className="headerContent">
+                <Header />
+                <SearchForm />
+            </div>
             <h2>Compare Hotels</h2>
             <div className="compareTable">
                 <div className="compareRow">

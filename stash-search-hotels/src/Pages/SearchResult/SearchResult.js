@@ -51,8 +51,10 @@ export default function SearchResult() {
 
   return (
     <div>
-      <Header />
-      <SearchForm />
+      <div className="headerContent">
+        <Header />
+        <SearchForm />
+      </div>
       <div className="resultsHeader">
         <Filters
           sortOption={sortOption}

@@ -6,8 +6,10 @@ import "./Home.scss";
 
 export default function Home() {
     return <>
-        <Header />
-        <SearchForm />
+        <div className="headerContent">
+            <Header />
+            <SearchForm />
+        </div>
         <div className="mainBody">
             <h1>The best hotels are independent hotels.</h1>
             <h2>That's not hyperbole. It's a fact.</h2>

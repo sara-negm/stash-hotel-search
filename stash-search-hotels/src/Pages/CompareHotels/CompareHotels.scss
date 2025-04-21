@@ -59,4 +59,15 @@
       outline: 2px solid #e18923;
     }
   }
+
+  .headerContent {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: center;
+
+    form {
+        align-self: center;
+    }
+}
   

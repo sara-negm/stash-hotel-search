@@ -12,9 +12,10 @@ export default function HotelDetails() {
 
   return (
     <div>
-      <Header />
-      <SearchForm />
-
+      <div className="headerContent">
+        <Header />
+        <SearchForm />
+      </div>
       <div className="hotelDetailsContainer">
         <div className="mainSection">
           <h1 className="hotelTitle">{hotel.name}</h1>
