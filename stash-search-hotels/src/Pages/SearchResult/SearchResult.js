@@ -73,6 +73,7 @@ export default function SearchResult() {
 
       </div>
       {filteredHotels.length > 0 ? (
+        <div className="resultsContainer">
         <div className="searchResults">
 
           {filteredHotels.map((hotel) => {
@@ -116,6 +117,7 @@ export default function SearchResult() {
               </div>
             );
           })}
+        </div>
         </div>
       ) : (
         <p>No hotels found for your search.</p>

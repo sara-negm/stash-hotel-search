@@ -22,54 +22,34 @@ export default function CompareHotels() {
                 <SearchForm />
             </div>
             <h2>Compare Hotels</h2>
-            <div className="compareTable">
-                <div className="compareRow">
-                    <div className="compareCell labelCell"></div>
-                    {hotelsToCompare.map(hotel => (
-                        <div
-                            key={hotel.id}
-                            className="compareColumn"
-                            onClick={() => navigate(`/hotelDetails/${hotel.id}`)}
-                            role="button"
-                            tabIndex={0}
-                            onKeyPress={(e) => e.key === 'Enter' && navigate(`/hotelDetails/${hotel.id}`)}
-                            aria-label={`View details for ${hotel.name}`}
-                        >
-                            <div className="compareCell imageCell">
-                                <img src={hotel.image} alt={hotel.name} />
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            <div className="compareGrid">
+  {hotelsToCompare.map(hotel => (
+    <div key={hotel.id} className="hotelCard" onClick={() => navigate(`/hotelDetails/${hotel.id}`)}>
+      <img src={hotel.image} alt={hotel.name} className="hotelImage" />
 
-                {attributeRows.map(row => (
-                    <div className="compareRow" key={row.accessor}>
-                        <div className="compareCell labelCell">{row.label}</div>
-                        {hotelsToCompare.map(hotel => {
-                            const value = hotel[row.accessor];
-                            return (
-                                <div
-                                    key={hotel.id}
-                                    className="compareColumn"
-                                    onClick={() => navigate(`/hotelDetails/${hotel.id}`)}
-                                    role="button"
-                                    tabIndex={0}
-                                    onKeyPress={(e) => e.key === 'Enter' && navigate(`/hotelDetails/${hotel.id}`)}
-                                    aria-label={`View details for ${hotel.name}`}
-                                >
-                                    <div className="compareCell">
-                                        {row.isCurrency
-                                            ? `$${value}`
-                                            : row.format
-                                                ? row.format(value)
-                                                : value}
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                ))}
-            </div>
+      <div className="cardBody">
+        <div className="priceRating">
+          <span className="price">${hotel.daily_rate}<span className="perNight">/night</span></span>
+          <span className="rating">⭐ 5.0</span>
+        </div>
+
+        <div className="locationRow">
+          <span className="icon">📍</span>
+          <span>{hotel.city}</span>
+        </div>
+
+        <h3 className="hotelName">{hotel.name}</h3>
+
+        <p className="description">
+          Enjoy a stylish stay at our {hotel.name} with prime access to {hotel.city}'s attractions.
+        </p>
+
+        <button className="chooseRoomBtn">Choose Room</button>
+      </div>
+    </div>
+  ))}
+</div>
+
         </div>
     );
 }

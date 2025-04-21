@@ -1,3 +1,9 @@
+.resultsContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
 .searchResults {
   background-color: white;
   max-height: 80vh;
@@ -5,140 +11,147 @@
   padding: 20px;
 
   .hotelItem {
-    background-color: #54666f;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    color: white;
-    cursor: pointer;
     display: grid;
     grid-template-columns: 1.5fr 2fr 1fr;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, #5c6b78 0%, #3d4852 100%);
+    color: white;
+    border-radius: 16px;
+    box-shadow:
+      0 6px 12px rgba(0, 0, 0, 0.15),
+      0 2px 6px rgba(0, 0, 0, 0.05) inset;
+    margin-bottom: 24px;
     overflow: hidden;
-    transition: transform 0.3s ease;
-
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(4px);
+  
     &:hover {
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-      transform: scale(1.01);
+      transform: scale(1.015);
+      box-shadow:
+        0 10px 18px rgba(0, 0, 0, 0.2),
+        0 4px 8px rgba(0, 0, 0, 0.1) inset;
     }
-
+  
     img {
       height: 100%;
-      object-fit: cover;
       width: 100%;
+      object-fit: cover;
+      border-radius: 0;
     }
-
-    .hotelDetails {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 20px;
-
-      h3 {
-        font-size: 24px;
-        font-weight: 700;
-        margin: 0;
-      }
-
-      .location {
-        font-size: 16px;
-        margin: 4px 0;
-      }
-
-      .partner {
-        font-size: 16px;
-        font-weight: bold;
-        margin-top: 10px;
-
-        .points {
-          font-size: 14px;
-          font-weight: normal;
-        }
-      }
-
-      .rating {
-        align-items: center;
-        display: flex;
-        margin: 8px 0;
-
-        .stars {
-          color: orange;
-          margin-right: 10px;
-        }
-      }
-    }
-
+  
     .hotelImageWrapper {
       position: relative;
-
+      overflow: hidden;
+  
       .arrow {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 50%;
-        color: white;
-        cursor: pointer;
-        font-size: 24px;
-        padding: 8px;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-
+        font-size: 20px;
+        color: white;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 6px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 1;
+  
         &.left {
           left: 10px;
         }
-
+  
         &.right {
           right: 10px;
         }
       }
     }
-
-    .priceSection {
-      align-items: center;
-      background-color: white;
-      color: #54666f;
+  
+    .hotelDetails {
+      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 16px;
-
-      .ctaButton {
-        background-color: #e18923;
-        border: none;
-        border-radius: 4px;
-        color: white;
-        cursor: pointer;
+  
+      h3 {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0;
+      }
+  
+      .location {
+        font-size: 14px;
+        opacity: 0.85;
+        margin: 6px 0;
+      }
+  
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 8px 0;
+  
+        .stars {
+          color: #ffba00;
+        }
+      }
+  
+      .partner {
+        font-size: 14px;
         font-weight: bold;
-        margin-top: 10px;
-        padding: 10px 16px;
+        margin-top: 8px;
+  
+        .points {
+          font-size: 13px;
+          font-weight: normal;
+          opacity: 0.85;
+        }
+      }
+    }
+  
+    .priceSection {
+      background: white;
+      color: #54666f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+  
+      .memberRate {
+        color: #e18923;
+        font-size: 14px;
+        font-weight: 600;
+      }
+  
+      .price {
+        font-size: 26px;
+        font-weight: bold;
+        margin: 8px 0;
+  
+        .originalPrice {
+          text-decoration: line-through;
+          color: #999;
+          font-size: 13px;
+          margin-right: 6px;
+        }
+      }
+  
+      .ctaButton {
+        margin-top: 12px;
+        background-color: #e18923;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
         transition: background 0.3s ease;
-
+  
         &:hover {
           background-color: #c9751e;
         }
       }
-
-      .memberRate {
-        align-items: center;
-        color: #e18923;
-        display: flex;
-        font-size: 14px;
-        font-weight: bold;
-        gap: 6px;
-      }
-
-      .price {
-        font-size: 28px;
-        font-weight: bold;
-        margin: 8px 0;
-
-        .originalPrice {
-          color: #999;
-          font-size: 14px;
-          margin-right: 8px;
-          text-decoration: line-through;
-        }
-      }
     }
   }
+  
 
   @media (max-width: 768px) {
     .hotelItem {
