@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import SearchResult from './Pages/SearchResult/SearchResult';
 import { PersistGate } from 'redux-persist/integration/react';
+import CompareHotels from './Pages/CompareHotels/CompareHotels';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/searchResult" element={<SearchResult />} />
         <Route path="/HotelDetails/:id" element={<HotelDetails />} />
+        <Route path="/compare" element={<CompareHotels />} />
       </Routes>
     </Router>
    </PersistGate>

@@ -2,42 +2,91 @@ import Header from "../../Components/Header/Header";
 import SearchForm from "../../Components/SearchForm/SearchForm";
 import hotels from '../../data.json';
 import { useSelector } from "react-redux";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./SearchResult.scss";
+import { useState } from "react";
+import Filters from "../../Components/Filters/Filters";
 
-export default function SearchResult(){
-    const { location, hotelName } = useSelector((state) => state.search);
-    const searchTerm = location.trim() !== "" ? location.toLowerCase() : hotelName.toLowerCase();
-    const filteredHotels = hotels.filter((hotel) =>
-      hotel.name.toLowerCase().includes(searchTerm) ||
-      hotel.city.toLowerCase().includes(searchTerm)
-    );
-    const navigate = useNavigate();
+export default function SearchResult() {
+  const { location, hotelName } = useSelector((state) => state.search);
+  const [sortOption, setSortOption] = useState('');
+  const [priceFilter, setPriceFilter] = useState('');
+  const [compareList, setCompareList] = useState([]);
 
-    return (
-        <div>
-            <Header />
-            <SearchForm />
-   
+  const searchTerm = location.trim() !== "" ? location.toLowerCase() : hotelName.toLowerCase();
+  const navigate = useNavigate();
 
-        {filteredHotels.length > 0 ? (
-               <div className="searchResults">
-               <h2>Results for "{searchTerm}"</h2>
-           
-          {filteredHotels.map((hotel) =>{
-                  const originalPrice = hotel.daily_rate;
-                  const isMember = hotel.has_member_rate;
-                  const discountedPrice = isMember ? Math.round(originalPrice * 0.9) : originalPrice;
-                
-              return (
-                <div className="hotelItem" key={hotel.id} onClick={()=> navigate(`/hotelDetails/${hotel.id}`)}>
+  const toggleCompare = (hotel) => {
+    setCompareList((prev) => {
+      const exists = prev.find((h) => h.id === hotel.id);
+      if (exists) return prev.filter((h) => h.id !== hotel.id);
+      return [...prev, hotel];
+    });
+  };
+
+  let filteredHotels = hotels.filter((hotel) =>
+    hotel.name.toLowerCase().includes(searchTerm) ||
+    hotel.city.toLowerCase().includes(searchTerm)
+  );
+
+  // Filter by price
+  filteredHotels = filteredHotels.filter((hotel) => {
+    const price = hotel.daily_rate;
+    if (priceFilter === '0-100') return price <= 100;
+    if (priceFilter === '100-200') return price > 100 && price <= 200;
+    if (priceFilter === '200+') return price > 200;
+    return true;
+  });
+
+  // Sort
+  if (sortOption === 'az') {
+    filteredHotels.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortOption === 'za') {
+    filteredHotels.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (sortOption === 'low-high') {
+    filteredHotels.sort((a, b) => a.daily_rate - b.daily_rate);
+  } else if (sortOption === 'high-low') {
+    filteredHotels.sort((a, b) => b.daily_rate - a.daily_rate);
+  }
+
+  return (
+    <div>
+      <Header />
+      <SearchForm />
+      <div className="resultsHeader">
+        <Filters
+          sortOption={sortOption}
+          setSortOption={setSortOption}
+          priceFilter={priceFilter}
+          setPriceFilter={setPriceFilter}
+        />
+        {compareList.length >= 2 && (
+          <button
+            className="compareBtn"
+            onClick={() => navigate('/compare', { state: { compareList } })}
+          >
+            Compare {compareList.length} Hotels
+          </button>
+        )}
+
+      </div>
+      {filteredHotels.length > 0 ? (
+        <div className="searchResults">
+
+          {filteredHotels.map((hotel) => {
+            const originalPrice = hotel.daily_rate;
+            const isMember = hotel.has_member_rate;
+            const discountedPrice = isMember ? Math.round(originalPrice * 0.9) : originalPrice;
+
+            return (
+              <div className="hotelItem" key={hotel.id}>
                 <div className="hotelImageWrapper">
                   <img src={hotel.image} alt={hotel.name} />
                   <div className="arrow left">‹</div>
                   <div className="arrow right">›</div>
                 </div>
-          
-                <div className="hotelDetails">
+
+                <div className="hotelDetails" onClick={() => navigate(`/hotelDetails/${hotel.id}`)}>
                   <h3>{hotel.name}</h3>
                   <div className="location">{hotel.city}</div>
                   <div className="rating">
@@ -46,24 +95,29 @@ export default function SearchResult(){
                   </div>
                   <div className="partner">⭐ Stash Partner <div className="points">Earn 10x points</div></div>
                 </div>
-          
+
                 <div className="priceSection">
-                  {isMember && (
-                    <div className="memberRate">🏷 Member Rate</div>
-                  )}
+                  {isMember && <div className="memberRate">🏷 Member Rate</div>}
                   <div className="price">
                     {isMember && <span className="originalPrice">${originalPrice}</span>}
                     <span>${discountedPrice}</span>
                   </div>
+                  <input
+                    type="checkbox"
+                    checked={!!compareList.find((h) => h.id === hotel.id)}
+                    onChange={() => toggleCompare(hotel)}
+                    aria-label={`Select ${hotel.name} for comparison`}
+                    style={{ "zIndex": 1000 }}
+                  />
                   <button className="ctaButton">Select your room</button>
                 </div>
               </div>
-          )}
-          )}
-          </div>
-        ) : (
-          <p>No hotels found for your search.</p>
-        )}
-      </div>
-    );
+            );
+          })}
+        </div>
+      ) : (
+        <p>No hotels found for your search.</p>
+      )}
+    </div>
+  );
 }

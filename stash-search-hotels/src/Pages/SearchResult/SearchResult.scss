@@ -147,19 +147,22 @@
       padding: 12px;
 
       .hotelImageWrapper {
-        order: -1; 
+        order: -1;
       }
+
       .hotelDetails {
         padding: 12px;
 
         h3 {
           font-size: 20px;
         }
+
         .location,
         .partner,
         .rating {
           font-size: 14px;
         }
+
         .partner .points {
           font-size: 12px;
         }
@@ -178,5 +181,30 @@
         }
       }
     }
+  }
+}
+
+.resultsHeader {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin: 24px;
+  vertical-align: middle;
+  gap: 8px;
+
+}
+
+.compareBtn {
+  width: 100px;
+  color: white;
+  background-color: #e18923;
+  border: none;
+  padding: 8px;
+  height: 50px;
+  margin-top: 30px;
+  &:hover {
+    cursor: pointer;
+    background-color: #a66419;
+
   }
 }
