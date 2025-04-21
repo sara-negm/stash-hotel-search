@@ -1,0 +1,32 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+
+
+
+    .searchBtn {
+        width: 100px;
+        color: white;
+        background-color: #e18923;
+        border: none;
+        padding: 8px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #a66419;
+
+        }
+    }
+
+    .searchForm {
+        display: flex;
+        flex-direction: row;
+        padding: 64px;
+        gap: 64px;
+        justify-content: space-evenly;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+}

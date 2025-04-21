@@ -1,0 +1,107 @@
+.hotelDetailsContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 40px 60px;
+    background-color: #f5f5f5;
+  
+    .mainSection {
+      flex: 3;
+  
+      .hotelTitle {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+  
+      .subtitle {
+        color: #d67234;
+        font-weight: 600;
+      }
+  
+      .location {
+        margin-top: 5px;
+        font-size: 14px;
+        color: #333;
+      }
+  
+      .mainImage {
+        margin: 24px 0;
+  
+        img {
+          max-width: 100%;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+      }
+  
+      .description {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #444;
+        box-shadow: 0 0 6px rgba(0,0,0,0.05);
+      }
+    }
+  
+    .sideSection {
+      flex: 1;
+  
+      .offerCard {
+        background-color: white;
+        padding: 16px;
+        border: 2px solid #d67234;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+  
+        .offerTitle {
+          font-weight: 700;
+          margin-bottom: 8px;
+        }
+  
+        .dealBtn {
+          background-color: #d67234;
+          color: white;
+          border: none;
+          padding: 10px 16px;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+  
+        .dealBtn:hover {
+          background-color: #b85c24;
+        }
+      }
+  
+      .ratingSection {
+        background-color: white;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  
+        .tripAdvisor {
+          margin-top: 10px;
+          img {
+            width: 24px;
+            vertical-align: middle;
+          }
+  
+          .greenStars {
+            font-size: 18px;
+          }
+  
+          .reviewCount {
+            display: block;
+            margin-top: 4px;
+            font-size: 14px;
+            color: #333;
+          }
+        }
+      }
+    }
+  }
+  

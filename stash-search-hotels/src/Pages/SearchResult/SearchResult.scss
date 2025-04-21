@@ -1,0 +1,143 @@
+.searchResults {
+    background-color: white;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+  
+    .hotelItem {
+      background-color: #54666f;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      color: white;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1.5fr 2fr 1fr;
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+  
+      &:hover {
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+        transform: scale(1.01);
+      }
+  
+      img {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+  
+      .hotelDetails {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+  
+        h3 {
+          font-size: 24px;
+          font-weight: 700;
+          margin: 0;
+        }
+  
+        .location {
+          font-size: 16px;
+          margin: 4px 0;
+        }
+  
+        .partner {
+          font-size: 16px;
+          font-weight: bold;
+          margin-top: 10px;
+  
+          .points {
+            font-size: 14px;
+            font-weight: normal;
+          }
+        }
+  
+        .rating {
+          align-items: center;
+          display: flex;
+          margin: 8px 0;
+  
+          .stars {
+            color: orange;
+            margin-right: 10px;
+          }
+        }
+      }
+  
+      .hotelImageWrapper {
+        position: relative;
+  
+        .arrow {
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 50%;
+          color: white;
+          cursor: pointer;
+          font-size: 24px;
+          padding: 8px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+  
+          &.left {
+            left: 10px;
+          }
+  
+          &.right {
+            right: 10px;
+          }
+        }
+      }
+  
+      .priceSection {
+        align-items: center;
+        background-color: white;
+        color: #54666f;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 16px;
+  
+        .ctaButton {
+          background-color: #e18923;
+          border: none;
+          border-radius: 4px;
+          color: white;
+          cursor: pointer;
+          font-weight: bold;
+          margin-top: 10px;
+          padding: 10px 16px;
+          transition: background 0.3s ease;
+  
+          &:hover {
+            background-color: #c9751e;
+          }
+        }
+  
+        .memberRate {
+          align-items: center;
+          color: #e18923;
+          display: flex;
+          font-size: 14px;
+          font-weight: bold;
+          gap: 6px;
+        }
+  
+        .price {
+          font-size: 28px;
+          font-weight: bold;
+          margin: 8px 0;
+  
+          .originalPrice {
+            color: #999;
+            font-size: 14px;
+            margin-right: 8px;
+            text-decoration: line-through;
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,18 @@
+.mainBody {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 100px;
+    text-align: start;
+    max-width: 80%;
+    h1 {
+        font-weight: 400;
+
+    }
+    h1:first-of-type {
+        color: #e18923;
+    }
+    h2 {
+        font-weight: 300;
+        margin: 0;
+    }
+}

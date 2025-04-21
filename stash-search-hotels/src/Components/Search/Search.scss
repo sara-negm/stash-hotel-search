@@ -1,0 +1,23 @@
+.search-wrapper {
+    position: relative;
+    max-width: 200px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 10px 12px 10px 36px; /* left padding to make space for the icon */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #888;
+    font-size: 16px;
+  }
+  

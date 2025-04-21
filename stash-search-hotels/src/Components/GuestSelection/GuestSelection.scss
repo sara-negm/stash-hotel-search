@@ -1,0 +1,98 @@
+.guest-selector {
+  position: relative;
+  width: 200px;
+  font-family: sans-serif;
+}
+
+.selector-toggle {
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  font-size: 10px;
+  margin-left: 6px;
+}
+
+.selector-dropdown {
+  position: absolute;
+  top: 110%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 8px 0;
+  z-index: 100;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  button {
+    width: 28px;
+    height: 28px;
+    font-weight: bold;
+    font-size: 16px;
+    background: #d67234;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  span {
+    min-width: 20px;
+    text-align: center;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-left: -10px;
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 10px 12px;
+  padding-right: 30px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+
+}
+
+.chevron-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 12px;
+  color: #888;
+  z-index: 100;
+}
